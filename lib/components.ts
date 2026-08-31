@@ -191,6 +191,96 @@ export function Demo() {
   }`,
   },
   {
+    name: "Hook Sidebar",
+    href: "/components/hooksidebar",
+    category: "navigation",
+    registry: "hook-sidebar",
+    isNew: true,
+    description:
+      "A vertical navigation list with a dashed rail that marks the active item.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/hook-sidebar.tsx`,
+    preview: "/componentdemos/hooksiebarvid.mp4",
+    dependencies: [
+      {
+        name: "motion",
+        icon: createElement(MotionIcon, { className: "h-4 w-4" }),
+      },
+    ],
+    interaction:
+      "Click an item to spring the accent rail down to it. Hovering or tabbing to another row draws a second, dimmer rail that stops where the accent one ends.",
+    props: [
+      {
+        name: "items",
+        type: "Array<string | { label: string; href?: string }>",
+        required: true,
+        description:
+          "Rows rendered as the vertical list. A plain string or an object with a label is a nav item, and href turns it into a link.",
+      },
+      {
+        name: "label",
+        type: "string",
+        description:
+          "Group title shown above the list, outside the rail. Omit it for a bare list. Also names the nav for screen readers.",
+      },
+      {
+        name: "value",
+        type: "number",
+        description:
+          "Active item index for controlled usage. When set, it wins over both the URL and internal state.",
+      },
+      {
+        name: "defaultValue",
+        type: "number",
+        default: "0",
+        description:
+          "Initial active index. Used only when no item has an href and value is not provided.",
+      },
+      {
+        name: "onChange",
+        type: "(index: number) => void",
+        description: "Called with the new index whenever an item is selected.",
+      },
+      {
+        name: "color",
+        type: "string",
+        default: '"#FC4C01"',
+        description:
+          "Any CSS color for the active rail (hex, rgb, hsl, var). The hover rail stays neutral.",
+      },
+      {
+        name: "dashed",
+        type: "boolean",
+        default: "true",
+        description:
+          "Draws the rail and its corner as dashes. Set false for a solid line.",
+      },
+      {
+        name: "className",
+        type: "string",
+        description: "Extra classes merged onto the root <nav> element.",
+      },
+    ],
+    usage: `import { HookSidebar } from "@/components/ui/hook-sidebar"
+
+  // any item with an href makes the rail follow the current route
+  const display = [
+    { label: "Folder", href: "/folder" },
+    { label: "Code block", href: "/codeblock" },
+  ]
+
+  const navigation = [{ label: "Gooey nav", href: "/gooeynav" }]
+
+  // one HookSidebar per group, stacked
+  export function Demo() {
+    return (
+      <div className="flex flex-col gap-5">
+        <HookSidebar label="Display" items={display} />
+        <HookSidebar label="Navigation" items={navigation} />
+      </div>
+    )
+  }`,
+  },
+  {
     name: "Proximity Sidebar",
     href: "/components/proximitysidebar",
     category: "navigation",
@@ -1025,7 +1115,6 @@ export function Demo() {
     name: "Notification bell",
     href: "/components/notificationbell",
     category: "feedback",
-    isNew: true,
     registry: "notification-bell",
     description: "An iOS-style notification bell with an unread count badge.",
     source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/notification-bell.tsx`,
@@ -1114,7 +1203,6 @@ export function Demo() {
     name: "Step player",
     href: "/components/stepplayer",
     category: "display",
-    isNew: true,
     registry: "step-player",
     description:
       "An iOS-style stepped progress track with a play, pause and replay control. The active step stretches into a bar that fills as it plays.",
@@ -1359,6 +1447,157 @@ export function Demo() {
 // Passing a src that is already loaded skips the wait, so the run flashes by.
 // Pass progress when your API reports it: <GridReveal src={src} progress={job.progress} />`,
   },
+  {
+    name: "Gooey nav",
+    href: "/components/gooeynav",
+    category: "navigation",
+    isNew: true,
+    registry: "gooey-nav",
+    description:
+      "A gooey navigation bar that separates the selected item from the group.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/gooey-nav.tsx`,
+    preview: "/componentdemos/gooeynav.mp4",
+    dependencies: [
+      {
+        name: "motion",
+        icon: createElement(MotionIcon, { className: "h-4 w-4" }),
+      },
+    ],
+    interaction:
+      "Click an item to lift it out of the bar; the rest close back into one piece behind it.",
+    props: [
+      {
+        name: "items",
+        type: "(string | { label: string; href?: string; icon?: ReactNode })[]",
+        required: true,
+        description:
+          "Nav entries. A string is a button, an object with href is a link, and icon renders before the label.",
+      },
+      {
+        name: "value",
+        type: "number",
+        description:
+          "Index of the selected item. Pass it to control the nav yourself; leave it out and the nav follows the url when the items have hrefs, and its own state otherwise.",
+      },
+      {
+        name: "defaultValue",
+        type: "number",
+        default: "0",
+        description:
+          "Index the nav starts on when it is uncontrolled. Ignored once value is passed, and ignored when an item href matches the current url.",
+      },
+      {
+        name: "onChange",
+        type: "(index: number) => void",
+        description: "Fires with the index of the item that was clicked.",
+      },
+      {
+        name: "size",
+        type: '"xs" | "sm" | "md" | "lg"',
+        default: '"md"',
+        options: ["xs", "sm", "md", "lg"],
+        description:
+          "Scale of the bar. Sets the label padding, text size and icon size, and picks the matching separation and radius so the shape stays in proportion. Use xs on phones, where it fits a 360px screen.",
+      },
+      {
+        name: "activeColor",
+        type: "string",
+        default: '"#FC4C01"',
+        description:
+          "Fill of the selected tile. The unselected bar follows the theme instead, light grey on light and near black on dark.",
+      },
+      {
+        name: "activeLabelColor",
+        type: "string",
+        default: '"#ffffff"',
+        description:
+          "Label color of the selected item. Set it when a light activeColor leaves white text unreadable.",
+      },
+      {
+        name: "separation",
+        type: "number",
+        description:
+          "Gap in pixels that opens on each side of the selected item, which is what pushes the rest of the bar aside. Defaults to the size: 14 (xs), 16 (sm), 20 (md), 24 (lg).",
+      },
+      {
+        name: "radius",
+        type: "number",
+        description:
+          "Corner radius of the tiles in pixels. Only the outer corners of the bar and the corners along an open gap use it; a closed seam sits at 0 so the tiles read as one shape. Defaults to the size: 8 (xs), 10 (sm), 12 (md), 14 (lg).",
+      },
+      {
+        name: "className",
+        type: "string",
+        description:
+          'Extra classes merged onto the root element (data-slot="gooey-nav"). The bar sizes to its content and never wraps, so add an overflow container here if it can outgrow its parent.',
+      },
+    ],
+    usage: `"use client"
+
+import { GooeyNav } from "@/components/ui/gooey-nav"
+
+export function Demo() {
+  return (
+    // hrefs make it track the url on its own, no value needed
+    <GooeyNav
+      items={[
+        { label: "Home", href: "/", icon: <HouseIcon /> },
+        { label: "Changelog", href: "/changelog" },
+        { label: "About", href: "/about" },
+      ]}
+    />
+  )
+}
+
+// strings render buttons instead, for a segmented control:
+// <GooeyNav items={["Day", "Week", "Month"]} onChange={setRange} />
+
+// size is a single value, so step it down yourself on small screens:
+// <GooeyNav items={items} size={useIsMobile() ? "xs" : "md"} />`,
+  },
+  {
+    name: "Delete button",
+    href: "/components/deletebutton",
+    category: "inputs",
+    isNew: false,
+    registry: "delete-button",
+    description:
+      "A delete button that asks for confirmation in place, no dialog needed.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/delete-button.tsx`,
+    dependencies: [
+      {
+        name: "motion",
+        icon: createElement(MotionIcon, { className: "h-4 w-4" }),
+      },
+    ],
+    interaction:
+      "Click the bin to lift its lid open. A panel slides out with a check to confirm and a cross to back out. Escape backs out too. Confirming draws a check where the bin was, backing out settles the bin in place.",
+    props: [
+      {
+        name: "onConfirm",
+        type: "() => void",
+        description: "Called when the check is pressed.",
+      },
+      {
+        name: "onCancel",
+        type: "() => void",
+        description:
+          "Called when the panel closes without deleting, from the cross, the bin, or Escape.",
+      },
+      {
+        name: "className",
+        type: "string",
+        description: "Extra classes merged onto the root element.",
+      },
+    ],
+    usage: `"use client"
+
+import { DeleteButton } from "@/components/ui/delete-button"
+
+export function Demo() {
+  return <DeleteButton onConfirm={() => remove(id)} />
+}`,
+  },
 ];
 
 export type PackageManager = "npm" | "pnpm" | "yarn" | "bun";
@@ -1392,7 +1631,7 @@ export const gallerySections: ComponentSection[] = [
   {
     id: "new",
     label: "New releases",
-    items: components.filter((c) => c.isNew),
+    items: components.filter((c) => c.isNew).reverse(),
   },
   ...CATEGORY_ORDER.map((id) => ({
     id,

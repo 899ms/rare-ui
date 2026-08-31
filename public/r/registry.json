@@ -45,6 +45,20 @@
       ]
     },
     {
+      "name": "hook-sidebar",
+      "type": "registry:ui",
+      "title": "Hook Sidebar",
+      "description": "A vertical navigation list with a dashed rail that marks the active item.",
+      "dependencies": ["motion"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/hook-sidebar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "family-drawer",
       "type": "registry:ui",
       "title": "Family Drawer",
@@ -231,6 +245,34 @@
       "files": [
         {
           "path": "components/ui/grid-reveal.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "gooey-nav",
+      "type": "registry:ui",
+      "title": "Gooey Nav",
+      "description": "A gooey navigation bar that separates the selected item from the group.",
+      "dependencies": ["motion"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/gooey-nav.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "delete-button",
+      "type": "registry:ui",
+      "title": "Delete Button",
+      "description": "A delete button that asks for confirmation in place, no dialog needed.",
+      "dependencies": ["motion"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/delete-button.tsx",
           "type": "registry:ui"
         }
       ]
