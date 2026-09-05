@@ -1552,7 +1552,6 @@ export function Demo() {
     name: "Delete button",
     href: "/components/deletebutton",
     category: "inputs",
-    isNew: true,
     registry: "delete-button",
     description:
       "A delete button that asks for confirmation in place, no dialog needed.",
@@ -1701,6 +1700,7 @@ export function Revenue({ total }: { total: number }) {
     description:
       "A dot-matrix orb that animates through idle, listening and thinking states.",
     source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/matrix-orb.tsx`,
+    preview: "/componentdemos/matrixorb.mp4",
     interaction:
       "Use the controls to switch the orb between its idle, listening and thinking states.",
     props: [
