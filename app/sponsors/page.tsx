@@ -92,7 +92,11 @@ export default async function SponsorsPage() {
       </section>
 
       <main className="flex-1">
-        <section className="mx-auto flex w-full max-w-6xl flex-col items-center gap-12 px-5 py-20 sm:px-6 md:py-28">
+        <SponsorStats stars={stars} />
+        <TierPricing />
+
+        <section className="mx-auto flex w-full max-w-6xl flex-col items-center gap-12 px-5 pb-20 sm:px-6 md:pb-28">
+          <PlatformTierGroup />
           <TierGroup
             tier="diamond"
             name="Diamond"
@@ -108,11 +112,7 @@ export default async function SponsorsPage() {
             name="Silver"
             emptyLabel="Be the first Silver sponsor"
           />
-          <PlatformTierGroup />
         </section>
-
-        <TierPricing />
-        <SponsorStats stars={stars} />
 
         <section className="mx-auto flex w-full max-w-6xl flex-col items-center gap-4 px-5 pb-24 text-center sm:px-6 md:pb-32">
           <h2 className="text-balance font-runde text-2xl font-bold tracking-tight sm:text-3xl">

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-// import Link from "next/link";
+import Link from "next/link";
 import GooeyNavbar from "@/components/GooeyNavbar";
 import { fetchStarCount } from "@/lib/github";
 import HeroCta from "@/components/HeroCta";
@@ -67,11 +67,20 @@ function BackersSection() {
         Rare UI is backed and supported by the finest
       </h2>
 
-      <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-3">
-        {PLATFORM_SPONSORS.map((sponsor) => (
-          <PlatformSponsorCard key={sponsor.name} sponsor={sponsor} />
-        ))}
-        <OpenSlotCard height={PLATFORM_CARD_HEIGHT} />
+      <div className="flex w-full flex-col items-center gap-8">
+        <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-3">
+          {PLATFORM_SPONSORS.map((sponsor) => (
+            <PlatformSponsorCard key={sponsor.name} sponsor={sponsor} />
+          ))}
+          <OpenSlotCard height={PLATFORM_CARD_HEIGHT} />
+        </div>
+
+        <Link
+          href="/sponsors"
+          className="font-runde text-sm font-semibold text-muted-foreground underline underline-offset-4 transition-colors duration-150 ease-out hover:text-foreground"
+        >
+          Become a sponsor &rarr;
+        </Link>
       </div>
 
       {/* <Link

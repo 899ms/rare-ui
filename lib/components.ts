@@ -748,13 +748,7 @@ export function Demo() {
         name: "color",
         type: "string",
         default: '"currentColor"',
-        options: [
-          "#1A73F2",
-          "#AF52DE",
-          "#FF3B30",
-          "#F75001",
-          "#34C759",
-        ],
+        options: ["#1A73F2", "#AF52DE", "#FF3B30", "#F75001", "#34C759"],
         control: "swatch",
         optionColors: {
           "#1A73F2": "#1A73F2",
@@ -1351,7 +1345,7 @@ export function Demo() {
     name: "Grid Reveal",
     href: "/components/gridreveal",
     category: "ai",
-    isNew: true,
+    isNew: false,
     registry: "grid-reveal",
     description:
       "A loading state for AI images that turns into the real picture when it arrives.",
@@ -1451,7 +1445,7 @@ export function Demo() {
     name: "Gooey nav",
     href: "/components/gooeynav",
     category: "navigation",
-    isNew: true,
+    isNew: false,
     registry: "gooey-nav",
     description:
       "A gooey navigation bar that separates the selected item from the group.",
@@ -1559,11 +1553,12 @@ export function Demo() {
     name: "Delete button",
     href: "/components/deletebutton",
     category: "inputs",
-    isNew: false,
+    isNew: true,
     registry: "delete-button",
     description:
       "A delete button that asks for confirmation in place, no dialog needed.",
     source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/delete-button.tsx`,
+    preview: "/componentdemos/deletbutton.mp4",
     dependencies: [
       {
         name: "motion",
@@ -1597,6 +1592,106 @@ import { DeleteButton } from "@/components/ui/delete-button"
 export function Demo() {
   return <DeleteButton onConfirm={() => remove(id)} />
 }`,
+  },
+  {
+    name: "Animated counter",
+    href: "/components/animatedcounter",
+    category: "display",
+    isNew: true,
+    registry: "animated-counter",
+    description:
+      "A number that counts to its new value on a wheel of digits, like an odometer.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/animated-counter.tsx`,
+    preview: "/componentdemos/animatednumbers.mp4",
+    dependencies: [
+      {
+        name: "motion",
+        icon: createElement(MotionIcon, { className: "h-4 w-4" }),
+      },
+    ],
+    interaction:
+      "Digits roll up as the number grows and back down as it shrinks, fading in and out at the top and bottom of each window rather than being cut off. A number that keeps changing spins instead of stuttering. The width always matches the number: a place that is gained slides in, one that is lost fades out while the rest close up, and the separators glide along with them.",
+    props: [
+      {
+        name: "value",
+        type: "number",
+        required: true,
+        description:
+          "The number to show. Each change animates from whatever is on screen, so it can be updated as often as you like.",
+      },
+      {
+        name: "decimals",
+        type: "number",
+        default: "0",
+        description:
+          "How many decimal places to keep, up to 15. The value is rounded to that precision, so the wheels always land on a whole digit.",
+      },
+      {
+        name: "duration",
+        type: "number",
+        default: "0.6",
+        description:
+          "Roughly how many seconds a digit takes to settle on its new face. Lower it when the value updates continuously, so the wheels stay close to the number.",
+      },
+      {
+        name: "padStart",
+        type: "number",
+        default: "1",
+        description:
+          "Fewest whole digits to show, up to 24, padded with leading zeros. Use it to hold the width steady when the number crosses a power of ten.",
+      },
+      {
+        name: "separator",
+        type: "string",
+        default: '","',
+        description:
+          "Character placed every three whole digits. Pass an empty string to group nothing.",
+      },
+      {
+        name: "decimalSeparator",
+        type: "string",
+        default: '"."',
+        description: "Character between the whole and decimal digits.",
+      },
+      {
+        name: "grouping",
+        type: '"western" | "indian"',
+        default: '"western"',
+        options: ["western", "indian"],
+        description:
+          "Where the separators land. Western groups every three digits, 1,234,567. Indian groups the last three then pairs, 12,34,567.",
+      },
+      {
+        name: "prefix",
+        type: "ReactNode",
+        description:
+          "Rendered before the number, for a currency mark or an icon. It sits outside the wheels and never animates.",
+      },
+      {
+        name: "suffix",
+        type: "ReactNode",
+        description: "Rendered after the number, for a unit or a percent sign.",
+      },
+      {
+        name: "className",
+        type: "string",
+        description:
+          'Extra classes merged onto the root element (data-slot="animated-counter"). Size, color, font and weight are all inherited, so style it like text. The digit columns carry data-slot="animated-counter-digit" and the separators data-slot="animated-counter-mark", for reaching either from the root.',
+      },
+    ],
+    usage: `"use client"
+
+import { AnimatedCounter } from "@/components/ui/animated-counter"
+
+export function Revenue({ total }: { total: number }) {
+  return <AnimatedCounter value={total} className="text-6xl font-medium" />
+}
+
+// money: two decimals and a currency mark that stays put
+// <AnimatedCounter value={total} decimals={2} prefix={<span>₹</span>} grouping="indian" />
+
+// fixed width, so a timer never shifts as it rolls over
+// <AnimatedCounter value={seconds} padStart={4} separator="" />`,
   },
 ];
 
