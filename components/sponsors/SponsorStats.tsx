@@ -1,17 +1,41 @@
 import { components } from "@/lib/components";
+import type { Pageviews } from "@/lib/databuddy";
 import { MONTHLY_PAGEVIEWS, TOTAL_PAGEVIEWS } from "@/lib/sponsors";
 
-function formatStars(stars: number) {
-  return stars >= 1000 ? `${(stars / 1000).toFixed(1)}K+` : `${stars}`;
+// a decimal reads as precision on small counts and as noise past 100 of a unit
+function formatCount(value: number) {
+  if (value < 1000) return `${value}`;
+  const [divisor, unit] =
+    value >= 1_000_000 ? ([1_000_000, "M"] as const) : ([1000, "K"] as const);
+  const scaled = value / divisor;
+  const shown =
+    scaled >= 100 ? Math.floor(scaled) : Math.floor(scaled * 10) / 10;
+  return `${shown}${unit}+`;
 }
 
-export default function SponsorStats({ stars }: { stars: number | null }) {
+function formatViews(views: number | null, fallback: string) {
+  return views == null ? fallback : formatCount(views);
+}
+
+export default function SponsorStats({
+  stars,
+  pageviews,
+}: {
+  stars: number | null;
+  pageviews: Pageviews;
+}) {
   const STATS = [
-    { value: MONTHLY_PAGEVIEWS, label: "Pageviews last month" },
-    { value: stars ? formatStars(stars) : "Open source", label: "GitHub stars" },
+    {
+      value: formatViews(pageviews.lastMonth, MONTHLY_PAGEVIEWS),
+      label: "Pageviews last month",
+    },
+    { value: stars ? formatCount(stars) : "Open source", label: "GitHub stars" },
     { value: `${components.length}+`, label: "Components" },
     { value: "MIT", label: "Free forever" },
-    { value: TOTAL_PAGEVIEWS, label: "Pageviews since launch" },
+    {
+      value: formatViews(pageviews.sinceLaunch, TOTAL_PAGEVIEWS),
+      label: "Pageviews since launch",
+    },
   ];
 
   return (
