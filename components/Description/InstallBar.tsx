@@ -137,7 +137,7 @@ export default function InstallBar({ item }: { item: ComponentItem }) {
             Install
           </motion.span>
           <motion.span
-            className="col-start-1 row-start-1 text-white"
+            className="col-start-1 row-start-1"
             animate={{
               opacity: open ? 1 : 0,
               filter: open ? "blur(0px)" : "blur(2.5px)",
