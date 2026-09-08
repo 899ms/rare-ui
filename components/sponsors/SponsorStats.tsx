@@ -24,12 +24,18 @@ export default function SponsorStats({
   stars: number | null;
   pageviews: Pageviews;
 }) {
+  // the caption would be a lie while the fallback constants are showing
+  const isLive = pageviews.lastMonth != null || pageviews.sinceLaunch != null;
+
   const STATS = [
     {
       value: formatViews(pageviews.lastMonth, MONTHLY_PAGEVIEWS),
       label: "Pageviews last month",
     },
-    { value: stars ? formatCount(stars) : "Open source", label: "GitHub stars" },
+    {
+      value: stars ? formatCount(stars) : "Open source",
+      label: "GitHub stars",
+    },
     { value: `${components.length}+`, label: "Components" },
     { value: "MIT", label: "Free forever" },
     {
@@ -56,6 +62,13 @@ export default function SponsorStats({
           </div>
         ))}
       </div>
+
+      {isLive && (
+        <p className="mt-4 text-center text-xs font-medium text-muted-foreground">
+          Live pageviews from databuddy.cc, our analytics sponsor. Updated
+          hourly.
+        </p>
+      )}
     </section>
   );
 }
