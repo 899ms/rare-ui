@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion, useSpring } from "motion/react";
 import { cn } from "@/lib/utils";
 
@@ -8,9 +8,20 @@ const RADIUS = 240;
 const PUSH = 80;
 const TILT = 14;
 
+const STROKE = "0.02em";
+const HOLLOW_MS = 260;
+
 const SPRING = { stiffness: 260, damping: 18, mass: 0.6 } as const;
 
-function DodgingDigit({ char, accent }: { char: string; accent?: boolean }) {
+function DodgingDigit({
+  char,
+  accent,
+  outlined,
+}: {
+  char: string;
+  accent?: boolean;
+  outlined: boolean;
+}) {
   const ref = useRef<HTMLSpanElement>(null);
   const x = useSpring(0, SPRING);
   const y = useSpring(0, SPRING);
@@ -56,7 +67,15 @@ function DodgingDigit({ char, accent }: { char: string; accent?: boolean }) {
   return (
     <motion.span
       ref={ref}
-      style={{ x, y, rotate }}
+      style={{
+        x,
+        y,
+        rotate,
+        WebkitTextFillColor: outlined ? "transparent" : "currentColor",
+        WebkitTextStrokeColor: "currentColor",
+        WebkitTextStrokeWidth: outlined ? STROKE : 0,
+        transition: `-webkit-text-fill-color ${HOLLOW_MS}ms ease-out`,
+      }}
       className={cn(
         "inline-block will-change-transform",
         accent ? "text-[#FC4C01]" : "text-black dark:text-white",
@@ -76,10 +95,28 @@ export default function DodgingDigits({
   accentIndex?: number;
   className?: string;
 }) {
+  const [outlined, setOutlined] = useState(false);
+
+  useEffect(() => {
+    const onClick = (event: MouseEvent) => {
+      const target = event.target as Element | null;
+      if (target?.closest("a, button")) return;
+      setOutlined((on) => !on);
+    };
+
+    window.addEventListener("click", onClick);
+    return () => window.removeEventListener("click", onClick);
+  }, []);
+
   return (
     <div aria-hidden className={cn("flex select-none", className)}>
       {[...digits].map((digit, index) => (
-        <DodgingDigit key={index} char={digit} accent={index === accentIndex} />
+        <DodgingDigit
+          key={index}
+          char={digit}
+          accent={index === accentIndex}
+          outlined={outlined}
+        />
       ))}
     </div>
   );
