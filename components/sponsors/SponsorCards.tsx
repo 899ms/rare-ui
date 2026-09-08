@@ -105,7 +105,7 @@ export function PlatformSponsorCard({
         sponsor={sponsor}
         className={`${sponsor.logoHeight} max-w-full object-contain`}
       />
-      <span className="font-runde text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground/70">
+      <span className="font-runde text-[11px] font-semibold uppercase tracking-[0.07em] text-muted-foreground/70">
         {sponsor.role}
       </span>
     </a>
