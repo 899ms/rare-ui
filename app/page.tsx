@@ -5,6 +5,7 @@ import { fetchStarCount } from "@/lib/github";
 import HeroCta from "@/components/HeroCta";
 import HeroIntro from "@/components/HeroIntro";
 import ComponentsShowcase from "@/components/ComponentsShowcase";
+import TestimonialsSection from "@/components/testimonials/TestimonialsSection";
 import Footer from "@/components/Footer";
 import {
   OpenSlotCard,
@@ -51,6 +52,7 @@ export default async function Home() {
         </div>
       </section>
       <ComponentsShowcase />
+      <TestimonialsSection />
       <BackersSection />
       <Footer />
     </>
