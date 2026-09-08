@@ -216,6 +216,12 @@ html {
   color: #fff;
 }
 
+@keyframes marquee-y {
+  to {
+    transform: translateY(-50%);
+  }
+}
+
 [vaul-drawer] {
   transition: transform 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
