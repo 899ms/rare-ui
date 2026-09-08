@@ -27,9 +27,10 @@ export const TIERS_HREF = "/sponsors#tiers";
 
 export const SPONSOR_X_URL = "https://x.com/swamimalode";
 
-export const MONTHLY_PAGEVIEWS = "170K+";
+// fallbacks for when the databuddy key is absent, as in local dev and forks
+export const MONTHLY_PAGEVIEWS = "300K+";
 
-export const TOTAL_PAGEVIEWS = "192K+";
+export const TOTAL_PAGEVIEWS = "348K+";
 
 // dodo does not echo the product back on the return url, so the tier is carried on redirect_url
 function checkoutUrl(productId: string, tier: SponsorTierId) {

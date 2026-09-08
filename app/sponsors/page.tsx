@@ -9,6 +9,7 @@ import {
   PlatformTierGroup,
   TierGroup,
 } from "@/components/sponsors/SponsorCards";
+import { fetchPageviews } from "@/lib/databuddy";
 import { fetchStarCount } from "@/lib/github";
 import { SITE_KEYWORDS } from "@/lib/seo";
 import { SITE_NAME } from "@/lib/site";
@@ -59,7 +60,10 @@ export const metadata: Metadata = {
 };
 
 export default async function SponsorsPage() {
-  const stars = await fetchStarCount();
+  const [stars, pageviews] = await Promise.all([
+    fetchStarCount(),
+    fetchPageviews(),
+  ]);
 
   return (
     <>
@@ -92,7 +96,7 @@ export default async function SponsorsPage() {
       </section>
 
       <main className="flex-1">
-        <SponsorStats stars={stars} />
+        <SponsorStats stars={stars} pageviews={pageviews} />
         <TierPricing />
 
         <section className="mx-auto flex w-full max-w-6xl flex-col items-center gap-12 px-5 pb-20 sm:px-6 md:pb-28">
