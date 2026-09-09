@@ -1,10 +1,10 @@
-<!-- <a href="https://rareui.com">
-  <img src="public/assets/landing/readme-hero.png" alt="Rare UI" width="100%" />
-</a> -->
+<div align="center">
+  <a href="https://rareui.com">
+    <img src="public/assets/repoassets/repoimg.png" alt="Rare UI" width="100%" />
+  </a>
+</div>
 
 <div align="center">
-
-# Rare UI
 
 **A shadcn registry of rare, ready-to-use components and animations.**
 
