@@ -29,7 +29,7 @@ export default function AnimatedCounterPage() {
             className={`w-0.5 rounded-full transition-[height,background-color] duration-200 motion-reduce:transition-none ${
               index < marker
                 ? "h-5 bg-[#3C3C43] dark:bg-[#EBEBF5]"
-                : "h-3.5 bg-[#E7E7EF] dark:bg-[#3C3C43]"
+                : "h-3.5 bg-[#C2C2CC] dark:bg-[#3C3C43]"
             }`}
           />
         ),
