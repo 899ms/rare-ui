@@ -5,7 +5,7 @@ import { motion } from "motion/react";
 import Sidebar from "./Sidebar";
 import { DescriptionPanel } from "../Description/DescriptionPanel";
 
-const NAV_SPACE = 308;
+const NAV_SPACE = 368;
 const INFO_SPACE = 576;
 
 export default function DesktopShell({

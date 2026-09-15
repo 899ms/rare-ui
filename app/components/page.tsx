@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import CarbonAds from "@/components/CarbonAds";
 import Footer from "@/components/Footer";
 import ComponentCard from "@/components/gallery/ComponentCard";
 import GooeyNavbar from "@/components/GooeyNavbar";
@@ -65,6 +66,8 @@ export default async function ComponentsIndexPage() {
             </div>
           </section>
         ))}
+
+        <CarbonAds className="mx-auto mt-14 w-full max-w-100" />
       </main>
 
       <Footer />

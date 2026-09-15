@@ -5,8 +5,9 @@ import SidebarNav from "./SidebarNav";
 import SidebarScroll from "./SidebarScroll";
 import { ClosedIcon, OpenIcon } from "./icons";
 import { Squircle } from "@squircle-js/react";
+import CarbonAds from "../CarbonAds";
 
-const PANEL_SHIFT = 340;
+const PANEL_SHIFT = 400;
 
 const Sidebar = ({
   open,
@@ -31,12 +32,14 @@ const Sidebar = ({
           initial={false}
           animate={{ x: open ? 0 : -PANEL_SHIFT }}
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
-          className="pointer-events-auto flex h-full w-75 flex-col bg-background p-4 pl-6"
+          className="pointer-events-auto flex h-full w-90 flex-col bg-background p-4 pl-6"
         >
           <h2 className="mt-18">Components</h2>
           <SidebarScroll className="mt-4 min-h-0 flex-1">
             <SidebarNav />
           </SidebarScroll>
+
+          <CarbonAds className="mt-4 shrink-0" />
         </motion.div>
       </Squircle>
     </div>
