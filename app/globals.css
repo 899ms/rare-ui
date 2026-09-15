@@ -229,3 +229,18 @@ html {
 [vaul-overlay] {
   transition: opacity 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
+
+/* only carbon's own custom properties; never override their internal class rules */
+[data-slot="carbon-ads"] {
+  #carbonads {
+    max-width: 100%;
+  }
+
+  #carbon-responsive {
+    --carbon-padding: 0.6em;
+    --carbon-bg-primary: var(--muted);
+    --carbon-bg-secondary: var(--border);
+    --carbon-text-color: var(--foreground);
+    font-size: 12px;
+  }
+}
