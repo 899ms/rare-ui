@@ -184,10 +184,12 @@ export function TierGroup({
   tier,
   name,
   emptyLabel,
+  showOpenSlot = true,
 }: {
   tier: SponsorTierId;
   name: string;
   emptyLabel?: string;
+  showOpenSlot?: boolean;
 }) {
   const sponsors = sponsorsByTier(tier);
   const height = TIER_CARD_HEIGHT[tier];
@@ -208,12 +210,14 @@ export function TierGroup({
             className={width}
           />
         ))}
-        <OpenSlotCard
-          height={height}
-          className={width}
-          label={empty && emptyLabel ? emptyLabel : undefined}
-          hoverLabel={empty && emptyLabel ? "Take this spot" : undefined}
-        />
+        {showOpenSlot && (
+          <OpenSlotCard
+            height={height}
+            className={width}
+            label={empty && emptyLabel ? emptyLabel : undefined}
+            hoverLabel={empty && emptyLabel ? "Take this spot" : undefined}
+          />
+        )}
       </div>
     </div>
   );

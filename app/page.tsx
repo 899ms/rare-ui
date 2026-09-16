@@ -10,8 +10,13 @@ import Footer from "@/components/Footer";
 import {
   OpenSlotCard,
   PlatformSponsorCard,
+  TierGroup,
 } from "@/components/sponsors/SponsorCards";
-import { PLATFORM_CARD_HEIGHT, PLATFORM_SPONSORS } from "@/lib/sponsors";
+import {
+  PLATFORM_CARD_HEIGHT,
+  PLATFORM_SPONSORS,
+  PLATFORM_TIER_NAME,
+} from "@/lib/sponsors";
 
 // const LOWEST_TIER_PRICE = Math.min(...TIERS.map((tier) => tier.price));
 
@@ -69,12 +74,19 @@ function BackersSection() {
         Rare UI is backed and supported by the finest
       </h2>
 
-      <div className="flex w-full flex-col items-center gap-8">
-        <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-3">
-          {PLATFORM_SPONSORS.map((sponsor) => (
-            <PlatformSponsorCard key={sponsor.name} sponsor={sponsor} />
-          ))}
-          <OpenSlotCard height={PLATFORM_CARD_HEIGHT} />
+      <div className="flex w-full max-w-6xl flex-col items-center gap-8">
+        <TierGroup tier="diamond" name="Diamond" showOpenSlot={false} />
+
+        <div className="flex w-full flex-col gap-4">
+          <h2 className="text-center font-runde text-sm font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            {PLATFORM_TIER_NAME}
+          </h2>
+          <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-3">
+            {PLATFORM_SPONSORS.map((sponsor) => (
+              <PlatformSponsorCard key={sponsor.name} sponsor={sponsor} />
+            ))}
+            <OpenSlotCard height={PLATFORM_CARD_HEIGHT} />
+          </div>
         </div>
 
         <Link
