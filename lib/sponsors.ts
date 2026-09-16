@@ -74,7 +74,16 @@ export const TIERS: SponsorTier[] = [
   },
 ];
 
-export const SPONSORS: Sponsor[] = [];
+export const SPONSORS: Sponsor[] = [
+  {
+    name: "Runable",
+    tier: "diamond",
+    href: "https://runable.com/?utm_source=rareui",
+    lightSrc: "/logos/runabledark.png",
+    darkSrc: "/logos/runablewhite.png",
+    logoHeight: "h-11 sm:h-16",
+  },
+];
 
 export const PLATFORM_TIER_NAME = "Platform Sponsors";
 
