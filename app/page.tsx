@@ -4,6 +4,7 @@ import GooeyNavbar from "@/components/GooeyNavbar";
 import { fetchStarCount } from "@/lib/github";
 import HeroCta from "@/components/HeroCta";
 import HeroIntro from "@/components/HeroIntro";
+import BackedBy from "@/components/BackedBy";
 import ComponentsShowcase from "@/components/ComponentsShowcase";
 import TestimonialsSection from "@/components/testimonials/TestimonialsSection";
 import Footer from "@/components/Footer";
@@ -50,6 +51,7 @@ export default async function Home() {
             <HeroIntro
               headline="Tasteful Components, Made to Stand Out."
               sub="Rare UI is a free, open-source collection of rare animated React components. Browse them in action below and install any component with the shadcn CLI."
+              badge={<BackedBy />}
             >
               <HeroCta />
             </HeroIntro>

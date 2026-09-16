@@ -14,10 +14,12 @@ const rise = {
 export default function HeroIntro({
   headline,
   sub,
+  badge,
   children,
 }: {
   headline: string;
   sub: string;
+  badge?: React.ReactNode;
   children: React.ReactNode;
 }) {
   const reduceMotion = useReducedMotion();
@@ -27,10 +29,21 @@ export default function HeroIntro({
 
   return (
     <>
+      {badge && (
+        <motion.div
+          initial={reduceMotion ? false : rise.hidden}
+          animate={rise.shown}
+          transition={step(0)}
+          className="mb-1"
+        >
+          {badge}
+        </motion.div>
+      )}
+
       <motion.h1
         initial={reduceMotion ? false : rise.hidden}
         animate={rise.shown}
-        transition={step(0)}
+        transition={step(badge ? 1 : 0)}
         className="max-w-4xl text-balance font-runde text-4xl font-bold tracking-tight text-black dark:text-white sm:text-5xl md:text-6xl lg:text-7xl"
       >
         {headline}
@@ -39,7 +52,7 @@ export default function HeroIntro({
       <motion.p
         initial={reduceMotion ? false : rise.hidden}
         animate={rise.shown}
-        transition={step(1)}
+        transition={step(badge ? 2 : 1)}
         className="max-w-xl font-medium text-black/60 dark:text-white/60 sm:text-lg"
       >
         {sub}
@@ -48,7 +61,7 @@ export default function HeroIntro({
       <motion.div
         initial={reduceMotion ? false : rise.hidden}
         animate={rise.shown}
-        transition={step(2)}
+        transition={step(badge ? 3 : 2)}
       >
         {children}
       </motion.div>
