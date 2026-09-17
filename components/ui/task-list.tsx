@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { ComponentProps } from "react";
+import type { ComponentProps, CSSProperties } from "react";
 import { motion, useReducedMotion, type Transition } from "motion/react";
 import { cn } from "@/lib/utils";
 
@@ -27,7 +27,16 @@ const INSTANT: Transition = { duration: 0 };
 
 // the same array every render, or motion reads a new target and replays it
 const POP_SCALE = [1, 1.08, 1];
-const FLICK = [0, 10, -3, 0];
+const FLICK = [0, 8, -2, 0];
+
+// the strike rides on the text itself, so a label that wraps gets a line per row
+const STRIKE_STYLE: CSSProperties = {
+  backgroundImage: "linear-gradient(currentColor, currentColor)",
+  backgroundRepeat: "no-repeat",
+  backgroundPosition: "0 52%",
+  boxDecorationBreak: "clone",
+  WebkitBoxDecorationBreak: "clone",
+};
 
 // each step waits for the one before it to report done, the row parks after all three
 const STAGE = { idle: 0, tick: 1, strike: 2, nudge: 3, settled: 4 } as const;
@@ -54,7 +63,7 @@ function TaskCheck({ done, onDrawn }: { done: boolean; onDrawn: () => void }) {
   return (
     <motion.span
       aria-hidden
-      className="relative grid h-7 w-7 shrink-0 place-items-center"
+      className="relative grid h-6 w-6 shrink-0 place-items-center"
       initial={false}
       animate={{ scale: done ? POP_SCALE : 1 }}
       transition={done ? timing(POP) : INSTANT}
@@ -74,8 +83,8 @@ function TaskCheck({ done, onDrawn }: { done: boolean; onDrawn: () => void }) {
         transition={timing(FILL)}
       />
       <svg
-        width="15"
-        height="15"
+        width="13"
+        height="13"
         viewBox="0 0 24 24"
         fill="none"
         stroke="white"
@@ -109,23 +118,20 @@ function TaskLabel({
   const timing = useTiming();
 
   return (
-    <span className="relative w-fit">
-      <span
+    <span className="min-w-0 flex-1">
+      <motion.span
         className={cn(
-          "text-[17px] font-medium tracking-[-0.01em] transition-colors duration-300",
+          "text-[15px] font-medium leading-6 tracking-[-0.01em] transition-colors duration-300",
           struck ? MUTED : "text-neutral-800 dark:text-neutral-100",
         )}
-      >
-        {label}
-      </span>
-      <motion.span
-        aria-hidden
-        className="absolute -left-1 top-1/2 h-[2px] w-[calc(100%+8px)] origin-left -translate-y-1/2 rounded-full bg-neutral-400 dark:bg-neutral-500"
+        style={STRIKE_STYLE}
         initial={false}
-        animate={{ scaleX: struck ? 1 : 0 }}
+        animate={{ backgroundSize: struck ? "100% 2px" : "0% 2px" }}
         transition={timing(STRIKE)}
         onAnimationComplete={onStruck}
-      />
+      >
+        {label}
+      </motion.span>
     </span>
   );
 }
@@ -188,7 +194,7 @@ export function TaskItem({
       transition={stage === STAGE.nudge ? timing(NUDGE) : INSTANT}
       onAnimationComplete={() => advance(STAGE.nudge, STAGE.settled)}
       className={cn(
-        "flex w-fit cursor-pointer items-center gap-3.5 rounded-[18px] px-4 py-3.5 text-left transition-shadow duration-300",
+        "flex w-fit max-w-full cursor-pointer items-start gap-3 rounded-[14px] px-3.5 py-2.5 text-left transition-shadow duration-300",
         SURFACE,
         LIFT,
         HOVER,
@@ -259,11 +265,19 @@ export function TaskList({
   return (
     <ul
       data-slot="task-list"
-      className={cn("flex w-fit flex-col items-start gap-3", className)}
+      className={cn(
+        "flex w-fit max-w-full flex-col items-start gap-2",
+        className,
+      )}
       {...props}
     >
       {[...open, ...finished].map((task) => (
-        <motion.li key={task.id} layout transition={timing(REORDER)}>
+        <motion.li
+          key={task.id}
+          layout
+          transition={timing(REORDER)}
+          className="max-w-full"
+        >
           <TaskItem
             label={task.label}
             checked={!!task.done}
