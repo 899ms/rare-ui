@@ -303,6 +303,20 @@
           "type": "registry:ui"
         }
       ]
+    },
+    {
+      "name": "task-list",
+      "type": "registry:ui",
+      "title": "Task List",
+      "description": "A checklist that strikes out completed tasks and moves them to the bottom of the list.",
+      "dependencies": ["motion"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/ui/task-list.tsx",
+          "type": "registry:ui"
+        }
+      ]
     }
   ]
 }

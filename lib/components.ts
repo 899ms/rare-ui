@@ -1767,6 +1767,68 @@ export function Demo() {
 // drive the bloom yourself with any value from 0 to 1
 // <MatrixOrb state="listening" level={level} />`,
   },
+  {
+    name: "Task list",
+    href: "/components/tasklist",
+    category: "inputs",
+    isNew: true,
+    registry: "task-list",
+    description:
+      "A checklist that strikes out completed tasks and moves them to the bottom of the list.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/task-list.tsx`,
+    dependencies: [
+      {
+        name: "motion",
+        icon: createElement(MotionIcon, { className: "h-4 w-4" }),
+      },
+    ],
+    interaction: "Click a row to toggle it.",
+    props: [
+      {
+        name: "tasks",
+        type: "Task[]",
+        description:
+          "The rows to show, each one an id, a label, and an optional done flag. Pass this to drive the list yourself.",
+      },
+      {
+        name: "defaultTasks",
+        type: "Task[]",
+        default: "[]",
+        description:
+          "The rows to start with when you are not driving the list. The list tracks which ones are done on its own.",
+      },
+      {
+        name: "onTasksChange",
+        type: "(tasks: Task[]) => void",
+        description:
+          "Called with the full list every time a row is ticked or unticked.",
+      },
+      {
+        name: "className",
+        type: "string",
+        description:
+          'Extra classes merged onto the root element (data-slot="task-list").',
+      },
+    ],
+    usage: `"use client"
+
+import { TaskList } from "@/components/ui/task-list"
+
+export function Demo() {
+  return (
+    <TaskList
+      defaultTasks={[
+        { id: "testing", label: "Organize a user testing session", done: true },
+        { id: "designs", label: "Prepare designs for client review" },
+        { id: "meditation", label: "15-minute meditation" },
+      ]}
+    />
+  )
+}
+
+// one row on its own, no list around it
+// <TaskItem label="15-minute meditation" onCheckedChange={setDone} />`,
+  },
 ];
 
 export type PackageManager = "npm" | "pnpm" | "yarn" | "bun";
