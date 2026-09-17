@@ -3,9 +3,9 @@
 import { TaskList } from "@/components/ui/task-list";
 
 const TASKS = [
-  { id: "testing", label: "Organize a user testing session", done: true },
-  { id: "designs", label: "Prepare designs for client review" },
-  { id: "meditation", label: "15-minute meditation" },
+  { id: "ship", label: "Ship a new component to the registry", done: true },
+  { id: "preview", label: "Record a preview for the gallery" },
+  { id: "star", label: "Star Rare UI" },
 ];
 
 export default function TaskListPage() {

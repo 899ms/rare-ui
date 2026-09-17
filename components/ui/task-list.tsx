@@ -33,31 +33,80 @@ const STRIKE_STYLE: CSSProperties = {
   WebkitBoxDecorationBreak: "clone",
 };
 
-// each step waits for the one before it, the row parks only after all three
-const STAGE = { idle: 0, tick: 1, strike: 2, nudge: 3, settled: 4 } as const;
+// the check is one line box tall at every size, so it sits on the first line
+const SIZES = {
+  sm: {
+    row: "gap-2.5 rounded-xl px-3 py-2",
+    check: "h-5 w-5",
+    text: "text-[13px] leading-5",
+    line: "1.5px",
+    list: "gap-1.5",
+  },
+  md: {
+    row: "gap-3 rounded-[14px] px-3.5 py-2.5",
+    check: "h-6 w-6",
+    text: "text-[15px] leading-6",
+    line: "2px",
+    list: "gap-2",
+  },
+  lg: {
+    row: "gap-3.5 rounded-2xl px-4 py-3",
+    check: "h-7 w-7",
+    text: "text-[17px] leading-7",
+    line: "2.5px",
+    list: "gap-2.5",
+  },
+} as const;
+
+export type TaskSize = keyof typeof SIZES;
+
+// ticking runs tick to strike to nudge, unticking runs the same road backwards
+const STAGE = {
+  idle: "idle",
+  tick: "tick",
+  strike: "strike",
+  nudge: "nudge",
+  settled: "settled",
+  unstrike: "unstrike",
+  untick: "untick",
+} as const;
 type Stage = (typeof STAGE)[keyof typeof STAGE];
 
+const FILLED: Stage[] = ["tick", "strike", "nudge", "settled", "unstrike"];
+const STRUCK: Stage[] = ["strike", "nudge", "settled"];
+
+const ACCENT_VAR = "--task-accent";
 const CARD =
-  "bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04),0_3px_10px_rgba(0,0,0,0.06)] hover:shadow-[0_1px_2px_rgba(0,0,0,0.05),0_6px_18px_rgba(0,0,0,0.09)] dark:bg-[#1F1F1F] dark:shadow-[0_1px_2px_rgba(0,0,0,0.4),0_3px_10px_rgba(0,0,0,0.3)] dark:hover:shadow-[0_1px_2px_rgba(0,0,0,0.45),0_6px_18px_rgba(0,0,0,0.4)]";
-const FOCUS =
-  "outline-none focus-visible:ring-2 focus-visible:ring-[#FF5F2E] focus-visible:ring-offset-2";
+  "bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04),0_3px_10px_rgba(0,0,0,0.06)] hover:shadow-[0_1px_2px_rgba(0,0,0,0.05),0_6px_18px_rgba(0,0,0,0.09)] active:brightness-95 dark:bg-[#1F1F1F] dark:shadow-[0_1px_2px_rgba(0,0,0,0.4),0_3px_10px_rgba(0,0,0,0.3)] dark:hover:shadow-[0_1px_2px_rgba(0,0,0,0.45),0_6px_18px_rgba(0,0,0,0.4)] dark:active:brightness-110";
+const FOCUS = `outline-none focus-visible:ring-2 focus-visible:ring-[var(${ACCENT_VAR})] focus-visible:ring-offset-2`;
 
 function useTiming() {
   const reduced = useReducedMotion() ?? false;
   return (transition: Transition) => (reduced ? INSTANT : transition);
 }
 
-function TaskCheck({ done, onDrawn }: { done: boolean; onDrawn: () => void }) {
+function TaskCheck({
+  filled,
+  size,
+  onDrawn,
+}: {
+  filled: boolean;
+  size: TaskSize;
+  onDrawn: () => void;
+}) {
   const timing = useTiming();
 
   return (
     <motion.svg
       viewBox="0 0 24 24"
       aria-hidden
-      className="h-6 w-6 shrink-0 text-neutral-300 dark:text-neutral-600"
+      className={cn(
+        "shrink-0 text-neutral-300 dark:text-neutral-600",
+        SIZES[size].check,
+      )}
       initial={false}
-      animate={{ scale: done ? POP_SCALE : 1 }}
-      transition={done ? timing(POP) : INSTANT}
+      animate={{ scale: filled ? POP_SCALE : 1 }}
+      transition={filled ? timing(POP) : INSTANT}
     >
       <motion.circle
         cx="12"
@@ -69,17 +118,17 @@ function TaskCheck({ done, onDrawn }: { done: boolean; onDrawn: () => void }) {
         strokeLinecap="round"
         strokeDasharray={RING_DASH}
         initial={false}
-        animate={{ opacity: done ? 0 : 1 }}
+        animate={{ opacity: filled ? 0 : 1 }}
         transition={timing(FILL)}
       />
       <motion.circle
         cx="12"
         cy="12"
         r="12"
-        fill="#FF5F2E"
+        fill={`var(${ACCENT_VAR})`}
         style={{ transformBox: "view-box", transformOrigin: "12px 12px" }}
         initial={false}
-        animate={{ scale: done ? 1 : 0 }}
+        animate={{ scale: filled ? 1 : 0 }}
         transition={timing(FILL)}
       />
       <motion.path
@@ -90,7 +139,7 @@ function TaskCheck({ done, onDrawn }: { done: boolean; onDrawn: () => void }) {
         strokeLinecap="round"
         strokeLinejoin="round"
         initial={false}
-        animate={{ pathLength: done ? 1 : 0, opacity: done ? 1 : 0 }}
+        animate={{ pathLength: filled ? 1 : 0, opacity: filled ? 1 : 0 }}
         transition={timing(TICK)}
         onAnimationComplete={onDrawn}
       />
@@ -101,26 +150,30 @@ function TaskCheck({ done, onDrawn }: { done: boolean; onDrawn: () => void }) {
 function TaskLabel({
   label,
   struck,
+  size,
   onStruck,
 }: {
   label: string;
   struck: boolean;
+  size: TaskSize;
   onStruck: () => void;
 }) {
   const timing = useTiming();
+  const { text, line } = SIZES[size];
 
   return (
     <span className="min-w-0 flex-1">
       <motion.span
         style={STRIKE_STYLE}
         className={cn(
-          "text-[15px] font-medium leading-6 tracking-[-0.01em] transition-colors duration-300",
+          "font-medium tracking-[-0.01em] transition-colors duration-300",
+          text,
           struck
             ? "text-neutral-400 dark:text-neutral-500"
             : "text-neutral-800 dark:text-neutral-100",
         )}
         initial={false}
-        animate={{ backgroundSize: struck ? "100% 2px" : "0% 2px" }}
+        animate={{ backgroundSize: `${struck ? 100 : 0}% ${line}` }}
         transition={timing(STRIKE)}
         onAnimationComplete={onStruck}
       >
@@ -137,18 +190,25 @@ export type TaskItemProps = Omit<
   label: string;
   checked?: boolean;
   defaultChecked?: boolean;
+  size?: TaskSize;
+  accent?: string;
   onCheckedChange?: (checked: boolean) => void;
   onSettled?: () => void;
+  onReverted?: () => void;
 };
 
 export function TaskItem({
   label,
   checked,
   defaultChecked = false,
+  size = "md",
+  accent = "#FF5F2E",
   onCheckedChange,
   onSettled,
+  onReverted,
   className,
   onClick,
+  style,
   ...props
 }: TaskItemProps) {
   const timing = useTiming();
@@ -158,16 +218,29 @@ export function TaskItem({
   const [stage, setStage] = useState<Stage>(done ? STAGE.settled : STAGE.idle);
   const [was, setWas] = useState(done);
 
-  // restart in the same render the tick flips, so the row never paints stale
+  // turn around in the same render the tick flips, so the row never paints stale
   if (was !== done) {
     setWas(done);
-    setStage(done ? STAGE.tick : STAGE.idle);
+    setStage(done ? STAGE.tick : STAGE.unstrike);
   }
 
-  const advance = (from: Stage, to: Stage) => {
-    if (!done || stage !== from) return;
-    setStage(to);
-    if (to === STAGE.settled) onSettled?.();
+  const onDrawn = () => {
+    if (stage === STAGE.tick) setStage(STAGE.strike);
+    if (stage === STAGE.untick) {
+      setStage(STAGE.idle);
+      onReverted?.();
+    }
+  };
+
+  const onStruck = () => {
+    if (stage === STAGE.strike) setStage(STAGE.nudge);
+    if (stage === STAGE.unstrike) setStage(STAGE.untick);
+  };
+
+  const onFlicked = () => {
+    if (stage !== STAGE.nudge) return;
+    setStage(STAGE.settled);
+    onSettled?.();
   };
 
   return (
@@ -177,6 +250,7 @@ export function TaskItem({
       aria-checked={done}
       data-slot="task-item"
       data-state={done ? "checked" : "unchecked"}
+      style={{ [ACCENT_VAR]: accent, ...style } as CSSProperties}
       onClick={(event) => {
         onClick?.(event);
         if (checked === undefined) setOwn(!done);
@@ -184,9 +258,10 @@ export function TaskItem({
       }}
       animate={{ x: stage === STAGE.nudge ? FLICK : 0 }}
       transition={stage === STAGE.nudge ? timing(NUDGE) : INSTANT}
-      onAnimationComplete={() => advance(STAGE.nudge, STAGE.settled)}
+      onAnimationComplete={onFlicked}
       className={cn(
-        "flex w-fit max-w-full cursor-pointer items-start gap-3 rounded-[14px] px-3.5 py-2.5 text-left transition-shadow duration-300",
+        "flex w-fit max-w-full cursor-pointer items-start text-left transition-[filter,box-shadow] duration-300",
+        SIZES[size].row,
         CARD,
         FOCUS,
         className,
@@ -194,13 +269,15 @@ export function TaskItem({
       {...props}
     >
       <TaskCheck
-        done={done}
-        onDrawn={() => advance(STAGE.tick, STAGE.strike)}
+        filled={FILLED.includes(stage)}
+        size={size}
+        onDrawn={onDrawn}
       />
       <TaskLabel
         label={label}
-        struck={stage >= STAGE.strike}
-        onStruck={() => advance(STAGE.strike, STAGE.nudge)}
+        struck={STRUCK.includes(stage)}
+        size={size}
+        onStruck={onStruck}
       />
     </motion.button>
   );
@@ -215,12 +292,16 @@ export type Task = {
 export type TaskListProps = ComponentProps<"ul"> & {
   tasks?: Task[];
   defaultTasks?: Task[];
+  size?: TaskSize;
+  accent?: string;
   onTasksChange?: (tasks: Task[]) => void;
 };
 
 export function TaskList({
   tasks,
   defaultTasks = [],
+  size = "md",
+  accent,
   onTasksChange,
   className,
   ...props
@@ -232,15 +313,15 @@ export function TaskList({
   const [parked, setParked] = useState<string[]>(() =>
     (tasks ?? defaultTasks).filter((task) => task.done).map((task) => task.id),
   );
+  const [announcement, setAnnouncement] = useState("");
 
-  const toggle = (id: string, done: boolean) => {
-    const next = current.map((task) =>
-      task.id === id ? { ...task, done } : task,
+  const toggle = (task: Task, done: boolean) => {
+    const next = current.map((item) =>
+      item.id === task.id ? { ...item, done } : item,
     );
     if (tasks === undefined) setOwn(next);
     onTasksChange?.(next);
-    // unticking pulls the row back up at once, ticking waits for the row
-    if (!done) setParked((ids) => ids.filter((parkedId) => parkedId !== id));
+    setAnnouncement(`${task.label} ${done ? "completed" : "reopened"}`);
   };
 
   // a parked row that is no longer done, or gone, was changed from outside
@@ -253,7 +334,8 @@ export function TaskList({
     <ul
       data-slot="task-list"
       className={cn(
-        "flex w-fit max-w-full flex-col items-start gap-2",
+        "flex w-fit max-w-full flex-col items-start",
+        SIZES[size].list,
         className,
       )}
       {...props}
@@ -268,15 +350,23 @@ export function TaskList({
           <TaskItem
             label={task.label}
             checked={!!task.done}
-            onCheckedChange={(done) => toggle(task.id, done)}
+            size={size}
+            accent={accent}
+            onCheckedChange={(done) => toggle(task, done)}
             onSettled={() =>
               setParked((ids) =>
                 ids.includes(task.id) ? ids : [...ids, task.id],
               )
             }
+            onReverted={() =>
+              setParked((ids) => ids.filter((id) => id !== task.id))
+            }
           />
         </motion.li>
       ))}
+      <li role="status" aria-live="polite" className="sr-only">
+        {announcement}
+      </li>
     </ul>
   );
 }

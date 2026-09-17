@@ -1804,6 +1804,27 @@ export function Demo() {
           "Called with the full list every time a row is ticked or unticked.",
       },
       {
+        name: "size",
+        type: '"sm" | "md" | "lg"',
+        default: '"md"',
+        options: ["sm", "md", "lg"],
+        description:
+          "Row size. Text, circle, padding and radius all scale together, and the circle always matches one line of the label.",
+      },
+      {
+        name: "accent",
+        type: "string",
+        default: '"#FF5F2E"',
+        description:
+          "Any CSS color for the filled circle and the focus ring. The strike and the faded text stay grey.",
+      },
+      {
+        name: "onSettled",
+        type: "() => void",
+        description:
+          "On TaskItem only. Fires once a row has finished ticking, which is how TaskList knows when to move it down.",
+      },
+      {
         name: "className",
         type: "string",
         description:
@@ -1818,16 +1839,16 @@ export function Demo() {
   return (
     <TaskList
       defaultTasks={[
-        { id: "testing", label: "Organize a user testing session", done: true },
-        { id: "designs", label: "Prepare designs for client review" },
-        { id: "meditation", label: "15-minute meditation" },
+        { id: "ship", label: "Ship a new component to the registry", done: true },
+        { id: "preview", label: "Record a preview for the gallery" },
+        { id: "star", label: "Star Rare UI" },
       ]}
     />
   )
 }
 
 // one row on its own, no list around it
-// <TaskItem label="15-minute meditation" onCheckedChange={setDone} />`,
+// <TaskItem label="Star Rare UI" size="sm" onCheckedChange={setDone} />`,
   },
 ];
 
