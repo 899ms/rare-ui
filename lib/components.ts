@@ -195,7 +195,6 @@ export function Demo() {
     href: "/components/hooksidebar",
     category: "navigation",
     registry: "hook-sidebar",
-    isNew: true,
     description:
       "A vertical navigation list with a dashed rail that marks the active item.",
     source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/hook-sidebar.tsx`,
@@ -1766,6 +1765,90 @@ export function Demo() {
 
 // drive the bloom yourself with any value from 0 to 1
 // <MatrixOrb state="listening" level={level} />`,
+  },
+  {
+    name: "Task list",
+    href: "/components/tasklist",
+    category: "inputs",
+    isNew: true,
+    registry: "task-list",
+    description:
+      "A checklist that strikes out completed tasks and moves them to the bottom of the list.",
+    source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/task-list.tsx`,
+    preview: "/componentdemos/tasklist.mp4",
+    dependencies: [
+      {
+        name: "motion",
+        icon: createElement(MotionIcon, { className: "h-4 w-4" }),
+      },
+    ],
+    interaction: "Click a row to toggle it.",
+    props: [
+      {
+        name: "tasks",
+        type: "Task[]",
+        description:
+          "The rows to show, each one an id, a label, and an optional done flag. Pass this to drive the list yourself.",
+      },
+      {
+        name: "defaultTasks",
+        type: "Task[]",
+        default: "[]",
+        description:
+          "The rows to start with when you are not driving the list. The list tracks which ones are done on its own.",
+      },
+      {
+        name: "onTasksChange",
+        type: "(tasks: Task[]) => void",
+        description:
+          "Called with the full list every time a row is ticked or unticked.",
+      },
+      {
+        name: "size",
+        type: '"sm" | "md" | "lg"',
+        default: '"md"',
+        options: ["sm", "md", "lg"],
+        description:
+          "Row size. Text, circle, padding and radius all scale together, and the circle always matches one line of the label.",
+      },
+      {
+        name: "accent",
+        type: "string",
+        default: '"#FF5F2E"',
+        description:
+          "Any CSS color for the filled circle and the focus ring. The strike and the faded text stay grey.",
+      },
+      {
+        name: "onSettled",
+        type: "() => void",
+        description:
+          "On TaskItem only. Fires once a row has finished ticking, which is how TaskList knows when to move it down.",
+      },
+      {
+        name: "className",
+        type: "string",
+        description:
+          'Extra classes merged onto the root element (data-slot="task-list").',
+      },
+    ],
+    usage: `"use client"
+
+import { TaskList } from "@/components/ui/task-list"
+
+export function Demo() {
+  return (
+    <TaskList
+      defaultTasks={[
+        { id: "ship", label: "Ship a new component to the registry", done: true },
+        { id: "preview", label: "Record a preview for the gallery" },
+        { id: "star", label: "Star Rare UI" },
+      ]}
+    />
+  )
+}
+
+// one row on its own, no list around it
+// <TaskItem label="Star Rare UI" size="sm" onCheckedChange={setDone} />`,
   },
 ];
 
