@@ -195,7 +195,6 @@ export function Demo() {
     href: "/components/hooksidebar",
     category: "navigation",
     registry: "hook-sidebar",
-    isNew: true,
     description:
       "A vertical navigation list with a dashed rail that marks the active item.",
     source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/hook-sidebar.tsx`,
@@ -1776,6 +1775,7 @@ export function Demo() {
     description:
       "A checklist that strikes out completed tasks and moves them to the bottom of the list.",
     source: `${REGISTRY_HOMEPAGE}/blob/main/components/ui/task-list.tsx`,
+    preview: "/componentdemos/tasklist.mp4",
     dependencies: [
       {
         name: "motion",
