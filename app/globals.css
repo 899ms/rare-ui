@@ -232,7 +232,8 @@ html {
 
 /* only carbon's own custom properties; never override their internal class rules */
 [data-slot="carbon-ads"] {
-  #carbonads {
+  /* carbon suffixes the id when a page serves more than one ad: #carbonads, #carbonads_1 */
+  [id^="carbonads"] {
     max-width: 100%;
   }
 

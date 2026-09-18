@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import CarbonAds from "@/components/CarbonAds";
 import Footer from "@/components/Footer";
 import GooeyNavbar from "@/components/GooeyNavbar";
 import HeroIntro from "@/components/HeroIntro";
@@ -104,6 +105,10 @@ export default async function TestimonialsPage() {
           className="mx-auto w-full max-w-6xl scroll-mt-24 px-5 py-20 sm:px-6 md:py-28"
         >
           <TestimonialWall />
+        </section>
+
+        <section className="mx-auto w-full max-w-6xl px-5 pb-20 sm:px-6 md:pb-28">
+          <CarbonAds count={2} className="mx-auto w-full max-w-204" />
         </section>
       </main>
 
