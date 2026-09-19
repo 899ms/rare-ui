@@ -26,7 +26,7 @@ Rare UI is a shadcn registry built with Next.js, Tailwind CSS, and TypeScript. E
 <table align="center">
 <tr>
 <td align="center" width="340">
-  <a href="https://runable.com/?utm_source=rareui">
+  <a href="https://runable.com/?utm_source=rareui&utm_medium=referral&utm_campaign=readme">
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset="public/logos/runablewhite.png" />
       <img src="public/logos/runabledark.png" alt="Runable" width="240" />

@@ -74,7 +74,7 @@ export function SponsorCard({
     <a
       href={sponsor.href}
       target="_blank"
-      rel="noreferrer"
+      rel="noopener"
       className={cn(CARD, height, className)}
     >
       <SponsorLogo
@@ -98,7 +98,7 @@ export function PlatformSponsorCard({
     <a
       href={sponsor.href}
       target="_blank"
-      rel="noreferrer"
+      rel="noopener"
       className={cn(CARD, height, "flex-col gap-3", className)}
     >
       <SponsorLogo

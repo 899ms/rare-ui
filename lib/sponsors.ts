@@ -78,7 +78,7 @@ export const SPONSORS: Sponsor[] = [
   {
     name: "Runable",
     tier: "diamond",
-    href: "https://runable.com/?utm_source=rareui",
+    href: "https://runable.com/?utm_source=rareui&utm_medium=referral&utm_campaign=sponsor",
     lightSrc: "/logos/runabledark.png",
     darkSrc: "/logos/runablewhite.png",
     logoHeight: "h-11 sm:h-16",
@@ -98,7 +98,7 @@ export const PLATFORM_SPONSORS: PlatformSponsor[] = [
   {
     name: "Databuddy",
     role: "Analytics Sponsor",
-    href: "https://www.databuddy.cc",
+    href: "https://www.databuddy.cc/?utm_source=rareui&utm_medium=referral&utm_campaign=sponsor",
     lightSrc: "/logos/databuddydark.svg",
     darkSrc: "/logos/databuddywhite.svg",
     logoHeight: "h-10 sm:h-12",
@@ -106,7 +106,7 @@ export const PLATFORM_SPONSORS: PlatformSponsor[] = [
   {
     name: "Mintlify",
     role: "Docs Sponsor",
-    href: "https://mintlify.com",
+    href: "https://mintlify.com/?utm_source=rareui&utm_medium=referral&utm_campaign=sponsor",
     lightSrc: "/logos/mintlifydark.png",
     darkSrc: "/logos/mintlifylight.png",
     logoHeight: "h-8 sm:h-9.5",

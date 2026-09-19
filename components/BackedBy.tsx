@@ -8,7 +8,7 @@ export default function BackedBy() {
     <a
       href={sponsor.href}
       target="_blank"
-      rel="noreferrer"
+      rel="noopener"
       className="inline-flex items-center gap-2.5 rounded-full border border-black/[0.07] bg-white/70 py-1.5 pl-4 pr-3.5 transition-colors duration-150 ease-out hover:bg-white dark:border-transparent dark:border-apple dark:bg-white/[0.045] dark:hover:bg-white/[0.08]"
     >
       <span className="font-runde text-[11px] font-semibold uppercase tracking-[0.12em] text-black/45 dark:text-white/45">
