@@ -67,7 +67,7 @@ export default async function ComponentsIndexPage() {
           </section>
         ))}
 
-        <CarbonAds count={2} className="mx-auto mt-14 w-full max-w-204" />
+        <CarbonAds className="mx-auto mt-14 w-full max-w-100" />
       </main>
 
       <Footer />

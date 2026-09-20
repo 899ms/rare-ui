@@ -108,7 +108,7 @@ export default async function TestimonialsPage() {
         </section>
 
         <section className="mx-auto w-full max-w-6xl px-5 pb-20 sm:px-6 md:pb-28">
-          <CarbonAds count={2} className="mx-auto w-full max-w-204" />
+          <CarbonAds className="mx-auto w-full max-w-100" />
         </section>
       </main>
 
