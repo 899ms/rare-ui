@@ -50,12 +50,16 @@ function SponsorLogo({
       <img
         src={sponsor.lightSrc}
         alt={sponsor.name}
-        className={`${className} w-auto dark:hidden`}
+        className={cn(className, "w-auto dark:hidden", sponsor.logoClassName)}
       />
       <img
         src={sponsor.darkSrc}
         alt={sponsor.name}
-        className={`hidden w-auto dark:block ${className}`}
+        className={cn(
+          "hidden w-auto dark:block",
+          className,
+          sponsor.logoClassName,
+        )}
       />
     </>
   );

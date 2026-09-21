@@ -17,6 +17,7 @@ export type SponsorBrand = {
   lightSrc: string;
   darkSrc: string;
   logoHeight: string;
+  logoClassName?: string;
 };
 
 export type Sponsor = SponsorBrand & { tier: SponsorTierId };
@@ -82,6 +83,16 @@ export const SPONSORS: Sponsor[] = [
     lightSrc: "/logos/runabledark.png",
     darkSrc: "/logos/runablewhite.png",
     logoHeight: "h-11 sm:h-16",
+  },
+  {
+    name: "PrivateAlps",
+    tier: "diamond",
+    href: "https://privatealps.net/?utm_source=rareui&utm_medium=referral&utm_campaign=sponsor",
+    lightSrc: "/logos/privatealpsdark.png",
+    darkSrc: "/logos/privatealpswhite.png",
+    logoHeight: "h-14 sm:h-20",
+    // the peak is sparse and the wordmark carries the mass, so bbox centering reads low
+    logoClassName: "-translate-y-2 sm:-translate-y-2.5",
   },
 ];
 
