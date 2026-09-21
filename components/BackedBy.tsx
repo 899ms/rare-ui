@@ -1,3 +1,5 @@
+import { Fragment } from "react";
+
 import { sponsorsByTier } from "@/lib/sponsors";
 
 export default function BackedBy() {
@@ -13,22 +15,26 @@ export default function BackedBy() {
       </span>
       <span className="h-3.5 w-px bg-black/10 dark:bg-white/15" />
       <span className="flex items-center gap-1.5">
-        {sponsors.map((sponsor) => (
-          <a
-            key={sponsor.name}
-            href={sponsor.href}
-            target="_blank"
-            rel="noopener"
-            title={sponsor.name}
-            className="opacity-90 transition-opacity duration-150 ease-out hover:opacity-100"
-          >
-            <img
-              src={sponsor.avatarSrc}
-              alt=""
-              className="size-[30px] rounded-full"
-            />
-            <span className="sr-only">{sponsor.name}</span>
-          </a>
+        {sponsors.map((sponsor, index) => (
+          <Fragment key={sponsor.name}>
+            {index > 0 && (
+              <span className="size-1 rounded-full bg-black/20 dark:bg-white/25" />
+            )}
+            <a
+              href={sponsor.href}
+              target="_blank"
+              rel="noopener"
+              title={sponsor.name}
+              className="opacity-90 transition-opacity duration-150 ease-out hover:opacity-100"
+            >
+              <img
+                src={sponsor.avatarSrc}
+                alt=""
+                className="size-[30px] rounded-full"
+              />
+              <span className="sr-only">{sponsor.name}</span>
+            </a>
+          </Fragment>
         ))}
       </span>
     </div>
