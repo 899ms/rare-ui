@@ -7,6 +7,8 @@ import { GithubLogo, XLogo, type LogoProps } from "./logos";
 
 const GITHUB_URL = "https://github.com/swamimalode07/rare-ui";
 const X_URL = "https://x.com/swamimalode";
+const DMCA_STATUS_URL =
+  "https://www.dmca.com/Protection/Status.aspx?ID=ee2a2636-6919-4dcc-a846-c70b066419b8";
 
 type FooterLink = {
   label: string;
@@ -58,6 +60,25 @@ function NavLink({ label, href, external, icon: Icon }: FooterLink) {
     <Link href={href} className={className} aria-label={Icon ? label : undefined}>
       {content}
     </Link>
+  );
+}
+
+function DmcaBadge() {
+  return (
+    <a
+      href={DMCA_STATUS_URL}
+      target="_blank"
+      rel="noreferrer"
+      title="DMCA.com Protection Status"
+      className="flex h-[17px] w-fit overflow-hidden rounded-[3px] font-runde text-[9px] font-bold uppercase leading-none tracking-[0.06em] shadow-[0_0_3px_rgba(0,0,0,0.16)] dark:shadow-[0_0_3px_rgba(0,0,0,0.55)]"
+    >
+      <span className="flex items-center bg-[#ff3300] px-1.5 text-[#282828]">
+        DMCA
+      </span>
+      <span className="flex items-center bg-[#282828] px-1.5 text-[#ff3300]">
+        Protected
+      </span>
+    </a>
   );
 }
 
@@ -132,6 +153,13 @@ export default function Footer() {
                 </a>
               </Fragment>
             ))}
+            <span
+              aria-hidden="true"
+              className="text-black/25 dark:text-white/25"
+            >
+              &middot;
+            </span>
+            <DmcaBadge />
           </span>
         </div>
       </div>
