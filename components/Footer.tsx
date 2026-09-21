@@ -1,14 +1,15 @@
 import { Fragment } from "react";
 import Link from "next/link";
 import { SUPPORT_EMAIL } from "@/lib/legal";
+import { SITE_URL } from "@/lib/site";
 import { TIERS_HREF } from "@/lib/sponsors";
 import FluidWave from "./FluidWave";
 import { GithubLogo, XLogo, type LogoProps } from "./logos";
 
 const GITHUB_URL = "https://github.com/swamimalode07/rare-ui";
 const X_URL = "https://x.com/swamimalode";
-const DMCA_STATUS_URL =
-  "https://www.dmca.com/Protection/Status.aspx?ID=ee2a2636-6919-4dcc-a846-c70b066419b8";
+const DMCA_ID = "ee2a2636-6919-4dcc-a846-c70b066419b8";
+const DMCA_STATUS_URL = `https://www.dmca.com/Protection/Status.aspx?ID=${DMCA_ID}&refurl=${SITE_URL}`;
 
 type FooterLink = {
   label: string;
@@ -70,7 +71,7 @@ function DmcaBadge() {
       target="_blank"
       rel="noreferrer"
       title="DMCA.com Protection Status"
-      className="flex h-[17px] w-fit overflow-hidden rounded-[3px] font-runde text-[9px] font-bold uppercase leading-none tracking-[0.06em] shadow-[0_0_3px_rgba(0,0,0,0.16)] dark:shadow-[0_0_3px_rgba(0,0,0,0.55)]"
+      className="flex h-4.25 w-fit overflow-hidden rounded-[3px] font-runde text-[9px] font-bold uppercase leading-none tracking-[0.06em] shadow-[0_0_3px_rgba(0,0,0,0.16)] dark:shadow-[0_0_3px_rgba(0,0,0,0.55)]"
     >
       <span className="flex items-center bg-[#ff3300] px-1.5 text-[#282828]">
         DMCA
