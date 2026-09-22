@@ -68,9 +68,13 @@ export const PANEL_INFO = {
   contactEmail: "swamimalodeofficial@gmail.com",
   contactNote: "Found a bug or issue? Feel free to drop a DM.",
   license: [
-    "Free to use and modify in both personal and commercial projects.",
-    "Attribution to Rare UI is appreciated when using a component.",
-    "Please don't resell the components as your own kit.",
+    "Personal and non-commercial projects only. Commercial use requires an active Rare UI sponsorship.",
+    "Credit is required. Any project shipping a Rare UI component must credit Rare UI with a visible link back to this site.",
+    "Don't copy a component into your project without that credit, and don't strip the credit from the source you copied.",
+    "Don't republish the components. No mirrors, no re-uploads, no listing them as your own work.",
+    "Don't resell or redistribute them, on their own or bundled into a template, kit, theme or paid course.",
+    "Don't claim authorship of a component or of Rare UI itself.",
+    "Reuse ends the moment these rules are broken. Ask first if your use doesn't fit them.",
   ],
 } as const;
 
