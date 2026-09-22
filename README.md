@@ -12,6 +12,7 @@
 <img src="https://img.shields.io/badge/Tailwind_CSS-0a0a0a?logo=tailwindcss&logoColor=FC4C01" alt="Tailwind CSS" />
 <img src="https://img.shields.io/badge/TypeScript-0a0a0a?logo=typescript&logoColor=FC4C01" alt="TypeScript" />
 <img src="https://img.shields.io/badge/shadcn-registry-FC4C01?labelColor=0a0a0a" alt="shadcn registry" />
+<img src="https://img.shields.io/badge/license-MIT%20%2B%20Commons%20Clause%20%2B%20Attribution-0a0a0a?labelColor=0a0a0a&color=FC4C01" alt="MIT + Commons Clause + Attribution" />
 
 [**rareui.com**](https://rareui.com) &nbsp;&middot;&nbsp; [Components](https://rareui.com/components) &nbsp;&middot;&nbsp; [Follow on X](https://x.com/swamimalode)
 
@@ -48,7 +49,7 @@ Rare UI is a shadcn registry built with Next.js, Tailwind CSS, and TypeScript. E
 </tr>
 </table>
 
-Rare UI is free and MIT licensed. Sponsorship keeps it that way. See the tiers at [rareui.com/sponsors](https://rareui.com/sponsors).
+Rare UI is free. Sponsorship keeps it that way. See the tiers at [rareui.com/sponsors](https://rareui.com/sponsors).
 
 ## Quick start
 
@@ -80,6 +81,16 @@ Components live in `components/ui`. After changing a component or `registry.json
 ## Contributing
 
 Issues and pull requests are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) for the full walkthrough, from creating a component to a working install command.
+
+## License
+
+MIT with the [Commons Clause and an attribution requirement](LICENSE). Use, modify and ship the components in anything you build, personal or commercial, closed source included.
+
+Credit is required. Any project shipping a Rare UI component must credit Rare UI with a visible link to [rareui.com](https://rareui.com), in a footer, an about page, a credits screen or a README, and must keep the credit and copyright notice in the source it copied.
+
+You may not sell, sublicense or redistribute the components themselves, alone, in a bundle, or ported to another framework.
+
+The name Rare UI, the logo and the site design are not covered by the license.
 
 <div align="center">
   <br />

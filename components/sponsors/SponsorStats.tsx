@@ -37,7 +37,7 @@ export default function SponsorStats({
       label: "GitHub stars",
     },
     { value: `${components.length}+`, label: "Components" },
-    { value: "MIT", label: "Free forever" },
+    { value: "Free", label: "For anything you build" },
     {
       value: formatViews(pageviews.sinceLaunch, TOTAL_PAGEVIEWS),
       label: "Pageviews since launch",

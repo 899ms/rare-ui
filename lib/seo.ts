@@ -80,7 +80,7 @@ export function componentJsonLd(href: string) {
         programmingLanguage: "TypeScript",
         runtimePlatform: "React",
         isPartOf: { "@id": `${SITE_URL}/#website` },
-        license: "https://opensource.org/licenses/MIT",
+        license: `${SITE_REPO}/blob/main/LICENSE`,
         author: { "@id": `${SITE_URL}/#organization` },
       },
     ],

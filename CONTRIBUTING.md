@@ -151,3 +151,7 @@ npx shadcn@latest add swamimalode07/rare-ui/glow-badge --dry-run
 - [ ] Showcase section added to `app/page.tsx`
 - [ ] `npm run build` passes, regenerated `public/r/` committed
 - [ ] Looks right in light and dark mode
+
+## License
+
+By opening a pull request you confirm the code is yours to contribute, and you license it under the same terms as the rest of the registry, MIT with the Commons Clause and the attribution requirement. See [LICENSE](LICENSE). You keep the copyright to what you wrote.

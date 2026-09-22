@@ -19,7 +19,7 @@ export const JURISDICTION = `the courts of ${BUSINESS_COUNTRY}`;
 
 export const DISPUTE_WINDOW = "30 days";
 
-export const LEGAL_UPDATED = "August 30, 2026";
+export const LEGAL_UPDATED = "September 23, 2026";
 
 export const MERCHANT_NAME = "Dodo Payments";
 
@@ -145,28 +145,30 @@ export const TERMS_SECTIONS: LegalSection[] = [
     heading: "Agreement",
     body: [
       `These terms govern your use of ${SITE_NAME} at ${SITE_URL}, the components published in its registry, and anything you buy from us. The site is operated by ${BUSINESS_OWNER}, an independent developer based in ${BUSINESS_COUNTRY}. By using the site, installing a component, or making a purchase, you accept these terms.`,
-      `In these terms, "the registry" means the free open-source components published at ${SITE_REPO}, and "paid offerings" means anything we sell. Sponsorship is currently the only paid offering.`,
+      `In these terms, "the registry" means the free components published at ${SITE_REPO}, and "paid offerings" means anything we sell. Sponsorship is currently the only paid offering.`,
     ],
   },
   {
-    heading: "The registry is free and open source",
+    heading: "The registry and its license",
     body: [
-      "Every component in the registry is free, published under the MIT License, and installable with the shadcn CLI. You may use, modify and ship the components in personal and commercial projects, closed source included, with no attribution required beyond what the MIT License states. You own the code once it is in your project.",
-      "What you may not do is repackage the registry as a competing component library or resell it as your own product. Individual components in your own applications are exactly what they are for.",
-      "The components are covered by the MIT License. The name Rare UI, the logo and the site design are not: those stay ours, and the license does not grant you rights to them.",
+      `Every component in the registry is free and installable with the shadcn CLI, published under the MIT License with the Commons Clause condition and an attribution requirement. The full text is in the LICENSE file at ${SITE_REPO}, and that file is what governs. If anything on this site conflicts with it, the LICENSE file wins.`,
+      "You may use, modify and ship the components in personal and commercial projects, closed source included. You own the code once it is in your project.",
+      `Attribution is required. Any project that ships part of a ${SITE_NAME} component must credit ${SITE_NAME} with a visible link to ${SITE_URL}, somewhere a visitor or user can find it, such as a footer, an about page, a credits screen or a README. The credit and the copyright notice must not be stripped from the source you copied.`,
+      "The Commons Clause rules out selling the components themselves. You may not sell, sublicense or redistribute them, whether alone, in a bundle, or as a version ported to another framework, and you may not repackage the registry as a competing component library. Using individual components inside your own application is exactly what they are for.",
+      "The license covers the component code. The name Rare UI, the logo and the site design are not: those stay ours, and the license does not grant you rights to them.",
     ],
   },
   {
     heading: "Contributions",
     body: [
-      "If you contribute code to the public repository, you confirm you have the right to do so, and you license your contribution under the same MIT License as the rest of the registry. You keep the copyright to what you wrote. We may edit, refactor or remove a contribution after it is merged.",
+      "If you contribute code to the public repository, you confirm you have the right to do so, and you license your contribution under the same license as the rest of the registry, MIT with the Commons Clause and the attribution requirement. You keep the copyright to what you wrote. We may edit, refactor or remove a contribution after it is merged.",
     ],
   },
   {
     heading: "If we add paid offerings later",
     body: [
       "The registry is free today and we intend to keep the components that are already published free. We may add paid offerings in the future, for example premium components, templates, licenses or hosted services.",
-      "Anything published under the MIT License stays under it. Releasing a paid product later does not retroactively change the license of a component you already installed, and does not give us a claim over a project you built with it.",
+      "A component published under the current license stays under it. Releasing a paid product later does not retroactively change the license of a component you already installed, and does not give us a claim over a project you built with it.",
       "Any paid offering will show its price and any additional product-specific terms at the point of purchase before you pay. These terms apply to it in addition to those.",
     ],
   },
@@ -174,7 +176,7 @@ export const TERMS_SECTIONS: LegalSection[] = [
     heading: "What sponsorship is",
     body: [
       `Sponsorship is a monthly advertising placement. Your logo and link are shown on the ${SITE_NAME} site and in the README according to the tier you pick, and it funds continued development of the free registry.`,
-      "Sponsorship does not buy priority support, custom component development, influence over the roadmap, or any right to the code beyond the MIT License everyone already has.",
+      "Sponsorship does not buy priority support, custom component development, influence over the roadmap, or any right to the code beyond the license everyone already has.",
     ],
   },
   {
