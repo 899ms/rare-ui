@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import {
   PLATFORM_CARD_HEIGHT,
   PLATFORM_CARD_WIDTH,
+  PLATFORM_LOGO_BAND,
   PLATFORM_SPONSORS,
   PLATFORM_TIER_BLURB,
   PLATFORM_TIER_NAME,
@@ -38,7 +39,7 @@ function PlusIcon({ className }: { className?: string }) {
   );
 }
 
-function SponsorLogo({
+export function SponsorLogo({
   sponsor,
   className,
 }: {
@@ -105,10 +106,12 @@ export function PlatformSponsorCard({
       rel="noopener"
       className={cn(CARD, height, "flex-col gap-3", className)}
     >
-      <SponsorLogo
-        sponsor={sponsor}
-        className={`${sponsor.logoHeight} max-w-full object-contain`}
-      />
+      <span className={cn("flex items-center", PLATFORM_LOGO_BAND)}>
+        <SponsorLogo
+          sponsor={sponsor}
+          className={`${sponsor.logoHeight} max-w-full object-contain`}
+        />
+      </span>
       <span className="font-runde text-[11px] font-semibold uppercase tracking-[0.07em] text-muted-foreground/70">
         {sponsor.role}
       </span>

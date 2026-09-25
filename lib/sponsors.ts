@@ -108,6 +108,19 @@ export const PLATFORM_CARD_HEIGHT = "h-24 sm:h-32";
 
 export const PLATFORM_CARD_WIDTH = "sm:w-[calc((100%-2rem)/3)]";
 
+// logos differ in height, so they share a fixed band to keep the role labels on one line
+export const PLATFORM_LOGO_BAND = "h-12 sm:h-14";
+
+// hoisted out of the array because the navbar links it too
+export const VERCEL_SPONSOR: PlatformSponsor = {
+  name: "Vercel",
+  role: "Hosting Sponsor",
+  href: "https://vercel.com/?utm_source=rareui&utm_medium=referral&utm_campaign=sponsor",
+  lightSrc: "/logos/verceldark.svg",
+  darkSrc: "/logos/vercelwhite.svg",
+  logoHeight: "h-7 sm:h-8",
+};
+
 export const PLATFORM_SPONSORS: PlatformSponsor[] = [
   {
     name: "Databuddy",
@@ -117,14 +130,15 @@ export const PLATFORM_SPONSORS: PlatformSponsor[] = [
     darkSrc: "/logos/databuddywhite.svg",
     logoHeight: "h-10 sm:h-12",
   },
-  {
-    name: "Mintlify",
-    role: "Docs Sponsor",
-    href: "https://mintlify.com/?utm_source=rareui&utm_medium=referral&utm_campaign=sponsor",
-    lightSrc: "/logos/mintlifydark.png",
-    darkSrc: "/logos/mintlifylight.png",
-    logoHeight: "h-8 sm:h-9.5",
-  },
+  VERCEL_SPONSOR,
+  // {
+  //   name: "Mintlify",
+  //   role: "Docs Sponsor",
+  //   href: "https://mintlify.com/?utm_source=rareui&utm_medium=referral&utm_campaign=sponsor",
+  //   lightSrc: "/logos/mintlifydark.png",
+  //   darkSrc: "/logos/mintlifylight.png",
+  //   logoHeight: "h-8 sm:h-9.5",
+  // },
 ];
 
 export const TIER_CARD_HEIGHT: Record<SponsorTierId, string> = {

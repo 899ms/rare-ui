@@ -5,6 +5,8 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
 import ThemeToggle from "@/components/ThemeToggle";
+import { SponsorLogo } from "@/components/sponsors/SponsorCards";
+import { VERCEL_SPONSOR } from "@/lib/sponsors";
 import { cn } from "@/lib/utils";
 
 const LINKS = [
@@ -140,6 +142,18 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center gap-2">
+          <a
+            href={VERCEL_SPONSOR.href}
+            target="_blank"
+            rel="noreferrer"
+            className={cn(
+              pill,
+              "hidden px-4 opacity-70 transition-opacity duration-200 hover:opacity-100 sm:flex",
+            )}
+          >
+            <SponsorLogo sponsor={VERCEL_SPONSOR} className="h-3.5" />
+          </a>
+
           <a
             href={GITHUB_URL}
             target="_blank"
